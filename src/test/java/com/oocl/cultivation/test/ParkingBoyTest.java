@@ -146,5 +146,19 @@ public class ParkingBoyTest {
         assertEquals("Unrecognized parking ticket.",errorMsg);
     }
 
+    @Test
+    @DisplayName("story2-AC2 When the customer does not provide a ticket when fetching a  car. The error message should be \"Please provide your parking ticket.\"")
+    void should_return_message_when_query_given_null() {
+        //given
+        when(mockParkingLot.fetch(isA(ParkingTicket.class))).thenReturn(null);
+        ParkingBoy parkingBoy = new ParkingBoy(mockParkingLot);
+        ParkingTicket parkingTicket = new ParkingTicket();
+        //when
+        Car car = parkingBoy.fetch(parkingTicket);
+        String errorMsg = parkingBoy.query();
+        //then
+        assertEquals(null, car);
+        assertEquals("Please provide your parking ticket.",errorMsg);
+    }
 
 }
