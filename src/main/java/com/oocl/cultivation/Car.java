@@ -5,6 +5,9 @@ import java.util.Objects;
 public class Car {
     private String licenseNumber;
 
+    public Car() {
+    }
+
     public Car(String licenseNumber) {
         this.licenseNumber = licenseNumber;
     }
