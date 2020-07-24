@@ -2,7 +2,7 @@ package com.oocl.cultivation;
 
 public class ParkingTicket {
 
-   private Boolean isUsed;
+   private boolean isUsed;
    private String licenseNumber;
 
     public ParkingTicket() {
@@ -13,11 +13,11 @@ public class ParkingTicket {
         this.licenseNumber = licenseNumber;
     }
 
-    public Boolean getUsed() {
+    public boolean getUsed() {
         return isUsed;
     }
 
-    public void setUsed(Boolean used) {
+    public void setUsed(boolean used) {
         isUsed = used;
     }
 

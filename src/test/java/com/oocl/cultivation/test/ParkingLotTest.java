@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParkingLotTest {
 
     @Test
-    @DisplayName("story1-ac2 The parking lot can accept park multiple cars  ")
+    @DisplayName("story1-AC2 The parking lot can accept park multiple cars  ")
     void should_return_quantity_10_when_park_given_10_cars() {
         //given
         ParkingLot parkingLot = new ParkingLot();
@@ -34,7 +34,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    @DisplayName("story1-ac2  Give the parking ticket back to the parking lot to fetch the car.")
+    @DisplayName("story1-AC2  Give the parking ticket back to the parking lot to fetch the car.")
     void should_validate_car_ticket_when_fetch_given_two_cars() {
         //given
         ParkingLot parkingLot = new ParkingLot();
@@ -65,7 +65,7 @@ public class ParkingLotTest {
 
     @Test
     @DisplayName("story1-AC3 If does not give a ticket when fetching. Then no car should be fetched.")
-    void should_return_no_car_when_fetch_given_null() {
+    void should_return_null_when_fetch_given_null() {
         //given
         ParkingLot parkingLot = new ParkingLot();
         //when
