@@ -139,16 +139,11 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(mockParkingLot);
         ParkingTicket parkingTicketUsed = new ParkingTicket();
         parkingTicketUsed.setUsed(true);
-
         //when
-        Car carFromTicketNull = parkingBoy.fetch(null);
-        String ticketNullErrorMsg = parkingBoy.query();
         Car carFromTicketUsed = parkingBoy.fetch(parkingTicketUsed);
         String ticketUsedErrorMsg = parkingBoy.query();
         //then
-        assertEquals(null, carFromTicketNull);
         assertEquals(null, carFromTicketUsed);
-        assertEquals("Unrecognized parking ticket.",ticketNullErrorMsg);
         assertEquals("Unrecognized parking ticket.",ticketUsedErrorMsg);
     }
 
@@ -158,9 +153,8 @@ public class ParkingBoyTest {
         //given
         when(mockParkingLot.fetch(isA(ParkingTicket.class))).thenReturn(null);
         ParkingBoy parkingBoy = new ParkingBoy(mockParkingLot);
-        ParkingTicket parkingTicket = new ParkingTicket();
         //when
-        Car car = parkingBoy.fetch(parkingTicket);
+        Car car = parkingBoy.fetch(null);
         String errorMsg = parkingBoy.query();
         //then
         assertEquals(null, car);

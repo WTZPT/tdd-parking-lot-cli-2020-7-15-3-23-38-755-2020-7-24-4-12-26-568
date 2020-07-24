@@ -15,7 +15,11 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
-        if(parkingTicket == null || parkingTicket.getUsed()) {
+        if(parkingTicket == null) {
+            this.errorMsg = "Please provide your parking ticket.";
+            return null;
+        }
+        if(parkingTicket.getUsed()) {
             this.errorMsg = "Unrecognized parking ticket.";
             return null;
         }
