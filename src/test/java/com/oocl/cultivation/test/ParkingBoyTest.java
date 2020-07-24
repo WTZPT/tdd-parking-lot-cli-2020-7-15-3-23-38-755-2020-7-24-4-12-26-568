@@ -1,9 +1,6 @@
 package com.oocl.cultivation.test;
 
-import com.oocl.cultivation.Car;
-import com.oocl.cultivation.ParkingBoy;
-import com.oocl.cultivation.ParkingLot;
-import com.oocl.cultivation.ParkingTicket;
+import com.oocl.cultivation.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -13,8 +10,7 @@ import org.mockito.Mock;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 
@@ -107,4 +103,20 @@ public class ParkingBoyTest {
         //then
         assertEquals(null, car);
     }
+
+    @Test
+    @DisplayName("story1-AC4 If the customer gives a ticket that has already been used. Then no car should be fetched.")
+    void should_return_null_when_fetch_given_used_ticket() {
+        //given
+        ParkingTicket parkingTicket = new ParkingTicket();
+        parkingTicket.setUsed(true);
+        when(mockParkingLot.fetch(eq(parkingTicket))).thenReturn(null);
+        ParkingBoy parkingBoy = new ParkingBoy(mockParkingLot);
+        //when
+        Car car = parkingBoy.fetch(parkingTicket);
+        //then
+        assertEquals(null,car);
+    }
+
+
 }

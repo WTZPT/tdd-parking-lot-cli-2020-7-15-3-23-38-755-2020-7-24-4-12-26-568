@@ -72,4 +72,17 @@ public class ParkingLotTest {
         //then
         assertEquals(null, car);
     }
+
+    @Test
+    @DisplayName("story1-AC4 If give a ticket that has already been used, then fetch car unsuccessfully.")
+    void should_return_null_when_fetch_given_used_ticket() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingTicket parkingTicket = parkingLot.park(new Car());
+        parkingTicket.setUsed(true);
+        //when
+        Car car = parkingLot.fetch(parkingTicket);
+        //then
+        assertEquals(null,car);
+    }
 }
