@@ -15,27 +15,14 @@ class ParkingBoyFacts {
 
 
     @Test
-    void should_return_ticket_when_park_given_car() {
+    void should__when_given_() {
         //given
-        Car car = new Car("C12345");
-        ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        //when
-        ParkingTicket ticket = parkingBoy.park(car);
-        //then
-        assertNotNull(ticket);
-    }
 
-    @Test
-    void should_return_car_when_fetch_given_ticket() {
-        //given
-        ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        ParkingTicket parkingTicket = new ParkingTicket();
         //when
-        Car car =parkingBoy.fetch(parkingTicket);
+
         //then
-        assertNotNull(car);
+
+
     }
 
     @Test
@@ -43,11 +30,11 @@ class ParkingBoyFacts {
         //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        ParkingTicket parkingTicket = new ParkingTicket(true,null);
+        ParkingTicket parkingTicket = new ParkingTicket(true, null);
         //when
         Car car = parkingBoy.fetch(parkingTicket);
         //then
-        assertEquals(null,car.getLicenseNumber());
+        assertEquals(null, car.getLicenseNumber());
     }
 
     @Test
@@ -58,6 +45,6 @@ class ParkingBoyFacts {
         //when
         Car car = parkingBoy.fetch(null);
         //then
-        assertEquals(null,car.getLicenseNumber());
+        assertEquals(null, car.getLicenseNumber());
     }
 }
