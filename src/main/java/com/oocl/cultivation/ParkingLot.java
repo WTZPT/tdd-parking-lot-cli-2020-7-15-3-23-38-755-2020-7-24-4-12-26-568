@@ -13,6 +13,9 @@ public class ParkingLot {
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
+        if(parkingTicket.equals(null)) {
+            return null;
+        }
         return this.spots.get(parkingTicket);
     }
 
