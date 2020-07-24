@@ -1,20 +1,30 @@
 package com.oocl.cultivation;
 
+import java.util.ArrayList;
+
 public class ParkingBoy {
 
-    private ParkingLot parkingLot;
+    private ArrayList<ParkingLot> parkingLots;
     private String errorMsg;
 
     public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+        this.parkingLots = new ArrayList<>();
+        this.parkingLots.add(parkingLot);
     }
 
     public ParkingTicket park(Car car) {
-        if(this.parkingLot.isLotFull()){
+        ParkingLot parkingLot = null;
+        for ( ParkingLot lot : parkingLots) {
+            parkingLot = lot;
+            if(!lot.isLotFull()) {
+                break;
+            }
+        }
+        if(parkingLot.isLotFull()){
             this.errorMsg = "Not enough position.";
             return null;
         }
-        ParkingTicket parkingTicket = this.parkingLot.park(car);
+        ParkingTicket parkingTicket = parkingLot.park(car);
         return parkingTicket;
     }
 
@@ -27,7 +37,14 @@ public class ParkingBoy {
             this.errorMsg = "Unrecognized parking ticket.";
             return null;
         }
-        return this.parkingLot.fetch(parkingTicket);
+        Car car = null;
+        for (ParkingLot lot : parkingLots) {
+            car = lot.fetch(parkingTicket);
+            if(car != null) {
+                break;
+            }
+        }
+        return car;
     }
 
     public String query(){
