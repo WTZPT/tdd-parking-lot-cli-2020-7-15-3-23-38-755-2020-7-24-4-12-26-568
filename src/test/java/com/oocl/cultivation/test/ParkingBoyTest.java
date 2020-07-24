@@ -129,4 +129,22 @@ public class ParkingBoyTest {
         //then
         assertEquals(null,parkingTicket);
     }
+
+    @Test
+    @DisplayName("story2-AC1 When the customer gives a wrong ticket (the parking boy does not provide the ticket / the ticket has been used). Then no car should be fetched. \n" +
+            "If I query the error message, I can get an \"Unrecognized parking ticket.\".")
+    void should_return_message_when_query_given_wrong_ticket() {
+        //given
+        when(mockParkingLot.fetch(isA(ParkingTicket.class))).thenReturn(null);
+        ParkingBoy parkingBoy = new ParkingBoy(mockParkingLot);
+        ParkingTicket parkingTicket = new ParkingTicket();
+        //when
+        Car car = parkingBoy.fetch(parkingTicket);
+        String errorMsg = parkingBoy.query();
+        //then
+        assertEquals(null, car);
+        assertEquals("Unrecognized parking ticket.",errorMsg);
+    }
+
+
 }

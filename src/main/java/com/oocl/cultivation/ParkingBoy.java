@@ -17,4 +17,8 @@ public class ParkingBoy {
 
         return this.parkingLot.fetch(parkingTicket);
     }
+
+    public String query() {
+        return "";
+    }
 }
