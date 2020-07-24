@@ -28,7 +28,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    @DisplayName("story1-ac1-The parking boy can park a car into the parking lot and returns a parking ticket.")
+    @DisplayName("story1-AC1 The parking boy can park a car into the parking lot and returns a parking ticket.")
     void should_return_ticket_when_park_given_car() {
         //given
         Car car = new Car();
@@ -41,7 +41,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    @DisplayName("story1-ac1-The customer can give the parking ticket back to the parking boy to fetch the car.")
+    @DisplayName("story1-AC1 The customer can give the parking ticket back to the parking boy to fetch the car.")
     void should_return_car_when_fetch_given_parking_ticket() {
         //given
         when(mockParkingLot.fetch(isA(ParkingTicket.class))).thenReturn(new Car());
@@ -53,7 +53,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    @DisplayName("story1-ac2-The parking boy can park multiple cars into on parking lot")
+    @DisplayName("story1-AC2 The parking boy can park multiple cars into on parking lot")
     void should_verify_10_when_park_given_10_cars() {
         //given
         when(mockParkingLot.park(isA(Car.class))).thenReturn(null);
@@ -71,7 +71,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    @DisplayName("story1-ac2-The parking boy can fetch right car using correspond ticket.")
+    @DisplayName("story1-AC2 The parking boy can fetch right car using correspond ticket.")
     void should_validate_car_ticket_when_fetch_given_two_cars() {
         //given
         when(mockParkingLot.fetch(isA(ParkingTicket.class))).thenReturn(new Car());
@@ -84,28 +84,27 @@ public class ParkingBoyTest {
     }
 
     @Test
-    @DisplayName("")
-    @Disabled
-    void should_return_no_car_when_fetch_given_tick_used() {
+    @DisplayName("story1-AC3 If the customer gives a wrong ticket (the parking boy does not provide the ticket). Then no car should be fetched.")
+    void should_return_null_when_fetch_given_wrong_tick() {
         //given
-        ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        ParkingTicket parkingTicket = new ParkingTicket(true, null);
+        when(mockParkingLot.fetch(isA(ParkingTicket.class))).thenReturn(null);
+        ParkingBoy parkingBoy = new ParkingBoy(mockParkingLot);
+        ParkingTicket parkingTicket = new ParkingTicket();
         //when
         Car car = parkingBoy.fetch(parkingTicket);
         //then
-        assertEquals(null, car.getLicenseNumber());
+        assertEquals(null, car);
     }
 
     @Test
-    @Disabled
-    void should_return_no_car_when_fetch_given_null() {
+    @DisplayName("story1-AC3 If the customer does not give a ticket. Then no car should be fetched.")
+    void should_return_null_when_fetch_given_null() {
         //given
-        ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        when(mockParkingLot.fetch(isA(ParkingTicket.class))).thenReturn(null);
+        ParkingBoy parkingBoy = new ParkingBoy(mockParkingLot);
         //when
         Car car = parkingBoy.fetch(null);
         //then
-        assertEquals(null, car.getLicenseNumber());
+        assertEquals(null, car);
     }
 }

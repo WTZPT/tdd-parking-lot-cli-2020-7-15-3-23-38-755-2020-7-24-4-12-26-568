@@ -51,27 +51,25 @@ public class ParkingLotTest {
 
 
     @Test
-    @Disabled
-    void should_return_no_car_when_fetch_given_tick_used() {
+    @DisplayName("story1-AC3 If gives a wrong ticket (the parking boy does not provide the ticket) when fetching. Then no car should be fetched.")
+    void should_return_null_when_fetch_given_wrong_ticket() {
         //given
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        ParkingTicket parkingTicket = new ParkingTicket(true, null);
+        ParkingTicket parkingTicket = new ParkingTicket();
         //when
-        Car car = parkingBoy.fetch(parkingTicket);
+        Car car = parkingLot.fetch(parkingTicket);
         //then
-        assertEquals(null, car.getLicenseNumber());
+        assertEquals(null, car);
     }
 
     @Test
-    @Disabled
+    @DisplayName("story1-AC3 If does not give a ticket when fetching. Then no car should be fetched.")
     void should_return_no_car_when_fetch_given_null() {
         //given
         ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         //when
-        Car car = parkingBoy.fetch(null);
+        Car car = parkingLot.fetch(null);
         //then
-        assertEquals(null, car.getLicenseNumber());
+        assertEquals(null, car);
     }
 }
