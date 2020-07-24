@@ -3,6 +3,7 @@ package com.oocl.cultivation;
 public class ParkingBoy {
 
     private ParkingLot parkingLot;
+    private String errorMsg;
 
     public ParkingBoy(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
@@ -14,11 +15,14 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
-
+        if(parkingTicket == null || parkingTicket.getUsed()) {
+            this.errorMsg = "Unrecognized parking ticket.";
+            return null;
+        }
         return this.parkingLot.fetch(parkingTicket);
     }
 
-    public String query() {
-        return "";
+    public String query(){
+        return this.errorMsg;
     }
 }
