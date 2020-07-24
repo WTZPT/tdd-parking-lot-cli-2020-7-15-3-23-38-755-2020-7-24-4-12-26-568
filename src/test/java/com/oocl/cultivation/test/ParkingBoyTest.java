@@ -118,5 +118,15 @@ public class ParkingBoyTest {
         assertEquals(null,car);
     }
 
-
+    @Test
+    @DisplayName("story1-AC5 The parking lot has a capacity (the default capacity of a parking lot is 10). If there is no position, then the user cannot park the car into it. Thus (s)he will not get any ticket.")
+    void should_return_null_when_park_given_new_car() {
+        //given
+        when(mockParkingLot.park(isA(Car.class))).thenReturn(null);
+        ParkingBoy parkingBoy = new ParkingBoy(mockParkingLot);
+        //when
+        ParkingTicket parkingTicket = parkingBoy.park(new Car());
+        //then
+        assertEquals(null,parkingTicket);
+    }
 }

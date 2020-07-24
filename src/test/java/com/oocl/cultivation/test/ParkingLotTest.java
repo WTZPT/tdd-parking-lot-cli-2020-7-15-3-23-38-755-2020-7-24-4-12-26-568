@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,5 +85,24 @@ public class ParkingLotTest {
         Car car = parkingLot.fetch(parkingTicket);
         //then
         assertEquals(null,car);
+    }
+
+    @Test
+    @DisplayName("story1-AC5 The parking lot has a capacity (the default capacity of a parking lot is 10). If there is no position, then the user cannot park the car into it. Thus (s)he will not get any ticket.")
+    void should_return_null_when_park_given_No_11_car() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        ArrayList<Car> carArrayList = new ArrayList<>();
+        for (int i = 0; i < 11;i++){
+            carArrayList.add(new Car(MessageFormat.format("C{0}",i)));
+        }
+        //when
+        ParkingTicket parkingTicket = new ParkingTicket();
+        for(Car car : carArrayList){
+              parkingTicket = parkingLot.park(car);
+        }
+        //then
+        assertEquals(null,parkingTicket);
+
     }
 }
