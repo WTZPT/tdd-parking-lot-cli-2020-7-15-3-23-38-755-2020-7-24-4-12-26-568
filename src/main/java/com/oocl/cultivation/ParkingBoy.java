@@ -10,6 +10,10 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
+        if(this.parkingLot.isLotFull()){
+            this.errorMsg = "Not enough position.";
+            return null;
+        }
         ParkingTicket parkingTicket = this.parkingLot.park(car);
         return parkingTicket;
     }

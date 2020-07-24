@@ -165,7 +165,7 @@ public class ParkingBoyTest {
     @DisplayName("story2-AC3 When the parking boy attempt to park a car into a parking lot without a position. The error message should be \"Not enough position.\"")
     void should_return_message_when_not_park_given_car() {
         //given
-        when(mockParkingLot.park(isA(Car.class))).thenReturn(null);
+        when(mockParkingLot.isLotFull()).thenReturn(true);
         ParkingBoy parkingBoy = new ParkingBoy(mockParkingLot);
 
         //when

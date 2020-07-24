@@ -29,4 +29,8 @@ public class ParkingLot {
     public void setSpots(HashMap<ParkingTicket, Car> spots) {
         this.spots = spots;
     }
+
+    public boolean isLotFull(){
+        return capacity < (spots.size()+1);
+    }
 }
