@@ -161,4 +161,18 @@ public class ParkingBoyTest {
         assertEquals("Please provide your parking ticket.",errorMsg);
     }
 
+    @Test
+    @DisplayName("story2-AC3 When the parking boy attempt to park a car into a parking lot without a position. The error message should be \"Not enough position.\"")
+    void should_return_message_when_not_park_given_car() {
+        //given
+        when(mockParkingLot.park(isA(Car.class))).thenReturn(null);
+        ParkingBoy parkingBoy = new ParkingBoy(mockParkingLot);
+
+        //when
+        ParkingTicket parkingTicket = parkingBoy.park(new Car());
+        String errorMsg = parkingBoy.query();
+        //then
+        assertEquals(null,parkingTicket);
+        assertEquals("Not enough position.",errorMsg);
+    }
 }
