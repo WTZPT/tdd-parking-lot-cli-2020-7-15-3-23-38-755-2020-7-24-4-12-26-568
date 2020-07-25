@@ -37,4 +37,8 @@ public class ParkingLot {
     public int hasSurplus() {
         return this.capacity - this.spots.size();
     }
+
+    public double getPositionRate() {
+        return hasSurplus()/(this.capacity*1.0);
+    }
 }

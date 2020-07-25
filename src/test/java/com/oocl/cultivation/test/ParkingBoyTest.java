@@ -2,6 +2,7 @@ package com.oocl.cultivation.test;
 
 import com.oocl.cultivation.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -175,6 +176,7 @@ public class ParkingBoyTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("story4-ac1 The smart parking boy will always park cars to the parking lot which contains more empty positions.")
     void should_validate_lot__when_park_give_lots() {
         //given
@@ -197,5 +199,31 @@ public class ParkingBoyTest {
         parkingBoy.park(car);
         //then
         verify(lotBHas1Car,times(1)).park(eq(car));
+    }
+
+    @Test
+    @DisplayName(" The super smart parking boy will always park cars to the parking lot which has a larger available position rate (positions available / total capacity).")
+    void should_validate_largest_poition_rate_lot__when_park_give_lots() {
+        //given
+        ArrayList<ParkingLot> lots = new ArrayList<>();
+        ParkingLot lotAHas3Car = mock(ParkingLot.class);
+        when(lotAHas3Car.getPositionRate()).thenReturn(0.7);
+        when(lotAHas3Car.park(isA(Car.class))).thenReturn(null);
+        ParkingLot lotBHas1Car = mock(ParkingLot.class);
+        when(lotBHas1Car.getPositionRate()).thenReturn(0.9);
+        when(lotBHas1Car.park(isA(Car.class))).thenReturn(null);
+        ParkingLot lotCHas2Car = mock(ParkingLot.class);
+        when(lotCHas2Car.getPositionRate()).thenReturn(0.8);
+        when(lotCHas2Car.park(isA(Car.class))).thenReturn(null);
+        lots.add(lotAHas3Car);
+        lots.add(lotBHas1Car);
+        lots.add(lotCHas2Car);
+        Car car = new Car();
+        //when
+        ParkingBoy parkingBoy = new ParkingBoy(lots);
+        parkingBoy.park(car);
+        //then
+        verify(lotBHas1Car,times(1)).park(eq(car));
+
     }
 }
