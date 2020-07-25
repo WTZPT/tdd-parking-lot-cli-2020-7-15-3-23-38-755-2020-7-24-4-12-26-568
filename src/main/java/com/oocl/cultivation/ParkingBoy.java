@@ -18,10 +18,10 @@ public class ParkingBoy {
 
     public ParkingTicket park(Car car) {
         ParkingLot parkingLot = null;
-        int lotSize = -1;
+        double posistionRate = -1;
         for ( ParkingLot lot : parkingLots) {
-            if(lot.hasSurplus() > lotSize) {
-                lotSize = lot.hasSurplus();
+            if(lot.getPositionRate() > posistionRate) {
+                posistionRate = lot.getPositionRate();
                 parkingLot = lot;
             }
         }

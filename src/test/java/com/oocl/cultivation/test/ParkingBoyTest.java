@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
 
 public class ParkingBoyTest {
 
-    ParkingLot mockParkingLot;
+     ParkingLot mockParkingLot;
 
     @BeforeEach
     void setUp(){
