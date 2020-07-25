@@ -2,10 +2,8 @@ package com.oocl.cultivation.test;
 
 import com.oocl.cultivation.*;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -174,5 +172,30 @@ public class ParkingBoyTest {
         //then
         assertEquals(null,parkingTicket);
         assertEquals("Not enough position.",errorMsg);
+    }
+
+    @Test
+    @DisplayName("story4-ac1 The smart parking boy will always park cars to the parking lot which contains more empty positions.")
+    void should_validate_lot__when_park_give_lots() {
+        //given
+        ArrayList<ParkingLot> lots = new ArrayList<>();
+        ParkingLot lotAHas3Car = mock(ParkingLot.class);
+       when(lotAHas3Car.hasSurplus()).thenReturn(3);
+       when(lotAHas3Car.park(isA(Car.class))).thenReturn(null);
+        ParkingLot lotBHas1Car = mock(ParkingLot.class);
+       when(lotBHas1Car.hasSurplus()).thenReturn(1);
+        when(lotBHas1Car.park(isA(Car.class))).thenReturn(null);
+        ParkingLot lotCHas2Car = mock(ParkingLot.class);
+       when(lotCHas2Car.hasSurplus()).thenReturn(2);
+        when(lotCHas2Car.park(isA(Car.class))).thenReturn(null);
+        lots.add(lotAHas3Car);
+        lots.add(lotBHas1Car);
+        lots.add(lotCHas2Car);
+        Car car = new Car();
+        //when
+        ParkingBoy parkingBoy = new ParkingBoy(lots);
+        parkingBoy.park(car);
+        //then
+        verify(lotBHas1Car,times(1)).park(eq(car));
     }
 }

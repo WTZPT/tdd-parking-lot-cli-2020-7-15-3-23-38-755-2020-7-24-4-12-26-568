@@ -12,6 +12,10 @@ public class ParkingBoy {
         this.parkingLots.add(parkingLot);
     }
 
+    public ParkingBoy(ArrayList<ParkingLot> lots) {
+        this.parkingLots = lots;
+    }
+
     public ParkingTicket park(Car car) {
         ParkingLot parkingLot = null;
         for ( ParkingLot lot : parkingLots) {

@@ -7,7 +7,7 @@ public class ParkingLot {
     private int capacity = 10;
 
     public ParkingTicket park(Car car) {
-        if(spots.size() + 1 > capacity){
+        if (spots.size() + 1 > capacity) {
             return null;
         }
         ParkingTicket parkingTicket = new ParkingTicket(false, car.getLicenseNumber());
@@ -16,7 +16,7 @@ public class ParkingLot {
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
-        if(parkingTicket == null || parkingTicket.getUsed()) {
+        if (parkingTicket == null || parkingTicket.getUsed()) {
             return null;
         }
         return this.spots.get(parkingTicket);
@@ -30,7 +30,11 @@ public class ParkingLot {
         this.spots = spots;
     }
 
-    public boolean isLotFull(){
-        return capacity < (spots.size()+1);
+    public boolean isLotFull() {
+        return capacity < (spots.size() + 1);
+    }
+
+    public int hasSurplus() {
+        return this.capacity - this.spots.size();
     }
 }
