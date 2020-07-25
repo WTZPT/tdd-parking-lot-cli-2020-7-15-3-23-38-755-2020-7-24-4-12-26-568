@@ -180,13 +180,13 @@ public class ParkingBoyTest {
         //given
         ArrayList<ParkingLot> lots = new ArrayList<>();
         ParkingLot lotAHas3Car = mock(ParkingLot.class);
-       when(lotAHas3Car.hasSurplus()).thenReturn(3);
+       when(lotAHas3Car.hasSurplus()).thenReturn(7);
        when(lotAHas3Car.park(isA(Car.class))).thenReturn(null);
         ParkingLot lotBHas1Car = mock(ParkingLot.class);
-       when(lotBHas1Car.hasSurplus()).thenReturn(1);
+       when(lotBHas1Car.hasSurplus()).thenReturn(9);
         when(lotBHas1Car.park(isA(Car.class))).thenReturn(null);
         ParkingLot lotCHas2Car = mock(ParkingLot.class);
-       when(lotCHas2Car.hasSurplus()).thenReturn(2);
+       when(lotCHas2Car.hasSurplus()).thenReturn(8);
         when(lotCHas2Car.park(isA(Car.class))).thenReturn(null);
         lots.add(lotAHas3Car);
         lots.add(lotBHas1Car);

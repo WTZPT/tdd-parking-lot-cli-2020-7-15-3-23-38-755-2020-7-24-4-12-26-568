@@ -18,10 +18,11 @@ public class ParkingBoy {
 
     public ParkingTicket park(Car car) {
         ParkingLot parkingLot = null;
+        int lotSize = -1;
         for ( ParkingLot lot : parkingLots) {
-            parkingLot = lot;
-            if(!lot.isLotFull()) {
-                break;
+            if(lot.hasSurplus() > lotSize) {
+                lotSize = lot.hasSurplus();
+                parkingLot = lot;
             }
         }
         if(parkingLot.isLotFull()){
