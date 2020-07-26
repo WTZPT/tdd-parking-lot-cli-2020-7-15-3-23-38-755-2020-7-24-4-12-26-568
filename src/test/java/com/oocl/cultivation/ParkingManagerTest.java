@@ -24,12 +24,12 @@ public class ParkingManagerTest {
         //given
         ParkingManager parkingManager = new ParkingManager();
         ArrayList<ParkingBoy> boys = new ArrayList<>();
-        boys.add(new ParkingBoy());
-        boys.add(new ParkingBoy());
-        boys.add(new ParkingBoy());
+        boys.add(mock(ParkingBoy.class));
+        boys.add(mock(ParkingBoy.class));
+        boys.add(mock(ParkingBoy.class));
         //when
         parkingManager.addParkingBoys(boys);
-        parkingManager.addParkingBoy(new ParkingBoy());
+        parkingManager.addParkingBoy(mock(ParkingBoy.class));
         //then
         assertEquals(4, parkingManager.getManagement().size());
     }

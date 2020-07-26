@@ -16,9 +16,6 @@ public class ParkingBoy {
         this.parkingLots = lots;
     }
 
-    public ParkingBoy() {
-
-    }
 
     public ParkingTicket park(Car car) {
         ParkingLot parkingLot = null;

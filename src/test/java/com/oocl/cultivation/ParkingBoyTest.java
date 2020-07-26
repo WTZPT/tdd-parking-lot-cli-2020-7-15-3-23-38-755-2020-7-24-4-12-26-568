@@ -1,6 +1,5 @@
 package com.oocl.cultivation;
 
-import com.oocl.cultivation.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -9,16 +8,17 @@ import org.junit.jupiter.api.Test;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 
 public class ParkingBoyTest {
 
-     ParkingLot mockParkingLot;
+    ParkingLot mockParkingLot;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         mockParkingLot = mock(ParkingLot.class);
     }
 
@@ -55,14 +55,14 @@ public class ParkingBoyTest {
         ArrayList<Car> carArrayList = new ArrayList<>();
         ParkingBoy parkingBoy = new ParkingBoy(mockParkingLot);
         for (int i = 0; i < 10; i++) {
-            carArrayList.add(new Car(MessageFormat.format("C{0}",i)));
+            carArrayList.add(new Car());
         }
         //when
         for (Car car : carArrayList) {
             parkingBoy.park(car);
         }
         //then
-        verify(mockParkingLot,times(10)).park(isA(Car.class));
+        verify(mockParkingLot, times(10)).park(isA(Car.class));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class ParkingBoyTest {
         parkingBoy.fetch(new ParkingTicket());
         parkingBoy.fetch(new ParkingTicket());
         //then
-        verify(mockParkingLot,times(2)).fetch(isA(ParkingTicket.class));
+        verify(mockParkingLot, times(2)).fetch(isA(ParkingTicket.class));
     }
 
     @Test
@@ -114,7 +114,7 @@ public class ParkingBoyTest {
         //when
         Car car = parkingBoy.fetch(parkingTicket);
         //then
-        assertEquals(null,car);
+        assertEquals(null, car);
     }
 
     @Test
@@ -126,7 +126,7 @@ public class ParkingBoyTest {
         //when
         ParkingTicket parkingTicket = parkingBoy.park(new Car());
         //then
-        assertEquals(null,parkingTicket);
+        assertEquals(null, parkingTicket);
     }
 
     @Test
@@ -143,7 +143,7 @@ public class ParkingBoyTest {
         String ticketUsedErrorMsg = parkingBoy.query();
         //then
         assertEquals(null, carFromTicketUsed);
-        assertEquals("Unrecognized parking ticket.",ticketUsedErrorMsg);
+        assertEquals("Unrecognized parking ticket.", ticketUsedErrorMsg);
     }
 
     @Test
@@ -157,7 +157,7 @@ public class ParkingBoyTest {
         String errorMsg = parkingBoy.query();
         //then
         assertEquals(null, car);
-        assertEquals("Please provide your parking ticket.",errorMsg);
+        assertEquals("Please provide your parking ticket.", errorMsg);
     }
 
     @Test
@@ -171,8 +171,8 @@ public class ParkingBoyTest {
         ParkingTicket parkingTicket = parkingBoy.park(new Car());
         String errorMsg = parkingBoy.query();
         //then
-        assertEquals(null,parkingTicket);
-        assertEquals("Not enough position.",errorMsg);
+        assertEquals(null, parkingTicket);
+        assertEquals("Not enough position.", errorMsg);
     }
 
     @Test
@@ -182,13 +182,13 @@ public class ParkingBoyTest {
         //given
         ArrayList<ParkingLot> lots = new ArrayList<>();
         ParkingLot lotAHas3Car = mock(ParkingLot.class);
-       when(lotAHas3Car.hasSurplus()).thenReturn(7);
-       when(lotAHas3Car.park(isA(Car.class))).thenReturn(null);
+        when(lotAHas3Car.hasSurplus()).thenReturn(7);
+        when(lotAHas3Car.park(isA(Car.class))).thenReturn(null);
         ParkingLot lotBHas1Car = mock(ParkingLot.class);
-       when(lotBHas1Car.hasSurplus()).thenReturn(9);
+        when(lotBHas1Car.hasSurplus()).thenReturn(9);
         when(lotBHas1Car.park(isA(Car.class))).thenReturn(null);
         ParkingLot lotCHas2Car = mock(ParkingLot.class);
-       when(lotCHas2Car.hasSurplus()).thenReturn(8);
+        when(lotCHas2Car.hasSurplus()).thenReturn(8);
         when(lotCHas2Car.park(isA(Car.class))).thenReturn(null);
         lots.add(lotAHas3Car);
         lots.add(lotBHas1Car);
@@ -198,7 +198,7 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(lots);
         parkingBoy.park(car);
         //then
-        verify(lotBHas1Car,times(1)).park(eq(car));
+        verify(lotBHas1Car, times(1)).park(eq(car));
     }
 
     @Test
@@ -223,6 +223,27 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(lots);
         parkingBoy.park(car);
         //then
-        verify(lotBHas1Car,times(1)).park(eq(car));
+        verify(lotBHas1Car, times(1)).park(eq(car));
+    }
+
+    @Test
+    @DisplayName("story6 isManged method can  Determine if the boy is in charge of the parking lot ")
+    void should___when__give_() {
+        //given
+        ArrayList<ParkingLot> lots = new ArrayList<>();
+        ParkingLot mockParkingLotA = mock(ParkingLot.class);
+        lots.add(mockParkingLotA);
+        ParkingLot mockParkingLotB = mock(ParkingLot.class);
+        lots.add(mockParkingLotB);
+        ParkingLot mockParkingLotC = mock(ParkingLot.class);
+        lots.add(mockParkingLotC);
+        ParkingLot mockParkingLotD = mock(ParkingLot.class);
+        //when
+        ParkingBoy parkingBoy = new ParkingBoy(lots);
+        //then
+        assertEquals(true, parkingBoy.isManged(mockParkingLotA));
+        assertEquals(true, parkingBoy.isManged(mockParkingLotB));
+        assertEquals(true, parkingBoy.isManged(mockParkingLotC));
+        assertEquals(false, parkingBoy.isManged(mockParkingLotD));
     }
 }
