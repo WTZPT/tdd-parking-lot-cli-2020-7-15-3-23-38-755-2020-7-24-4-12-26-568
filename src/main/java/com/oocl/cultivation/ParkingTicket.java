@@ -14,6 +14,10 @@ public class ParkingTicket {
         this.licenseNumber = licenseNumber;
     }
 
+    public ParkingTicket(boolean isUsed) {
+        this.isUsed = isUsed;
+    }
+
     public boolean getUsed() {
         return isUsed;
     }

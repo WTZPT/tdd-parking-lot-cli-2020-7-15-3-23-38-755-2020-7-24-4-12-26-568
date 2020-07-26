@@ -12,7 +12,7 @@ public class ParkingLot {
 
 
     public ParkingTicket park(Car car) {
-        ParkingTicket parkingTicket = new ParkingTicket(false, car.getLicenseNumber());
+        ParkingTicket parkingTicket = new ParkingTicket(false);
         spots.put(parkingTicket, car);
         return parkingTicket;
     }
