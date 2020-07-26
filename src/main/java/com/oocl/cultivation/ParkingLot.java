@@ -9,12 +9,9 @@ public class ParkingLot {
 
     private HashMap<ParkingTicket, Car> spots = new HashMap<>();
     private int capacity = 10;
-    private String errorMessage;
+
 
     public ParkingTicket park(Car car) {
-        if (spots.size() + 1 > capacity) {
-            return null;
-        }
         ParkingTicket parkingTicket = new ParkingTicket(false, car.getLicenseNumber());
         spots.put(parkingTicket, car);
         return parkingTicket;
@@ -23,16 +20,12 @@ public class ParkingLot {
     public Car fetch(ParkingTicket parkingTicket) {
         Car car = this.spots.get(parkingTicket);
         this.spots.remove(parkingTicket);
-       parkingTicket.setUsed(true);
+        parkingTicket.setUsed(true);
         return car;
     }
 
     public HashMap<ParkingTicket, Car> getSpots() {
         return spots;
-    }
-
-    public void setSpots(HashMap<ParkingTicket, Car> spots) {
-        this.spots = spots;
     }
 
     public boolean isLotFull() {
@@ -47,7 +40,4 @@ public class ParkingLot {
         return hasSurplus() / (this.capacity * 1.0);
     }
 
-    public String getErrorMessage() {
-        return this.errorMessage;
-    }
 }
