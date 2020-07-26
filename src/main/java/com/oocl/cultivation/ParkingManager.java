@@ -25,18 +25,8 @@ public class ParkingManager {
         return management;
     }
 
-    public void setManagement(ArrayList<ParkingBoy> management) {
-        this.management = management;
-    }
-
     public ParkingTicket park(ParkingLot parkingLot, Car car) {
-        ParkingBoy pb = null;
-        for (ParkingBoy parkingBoy : this.management) {
-            if (parkingBoy.isManged(parkingLot)) {
-                pb = parkingBoy;
-                break;
-            }
-        }
+        ParkingBoy pb = getParkingBoy(parkingLot);
 
         ParkingTicket ticket = pb.park(car);
         if (ticket == null) {
@@ -75,13 +65,7 @@ public class ParkingManager {
     }
 
     public Car fetch(ParkingLot parkingLot, ParkingTicket parkingTicket) {
-        ParkingBoy pb = null;
-        for (ParkingBoy parkingBoy : this.management) {
-            if (parkingBoy.isManged(parkingLot)) {
-                pb = parkingBoy;
-                break;
-            }
-        }
+        ParkingBoy pb = getParkingBoy(parkingLot);
 
         Car car = pb.fetch(parkingTicket);
 
@@ -90,5 +74,16 @@ public class ParkingManager {
         }
 
         return car;
+    }
+
+    private ParkingBoy getParkingBoy(ParkingLot parkingLot) {
+        ParkingBoy pb = null;
+        for (ParkingBoy parkingBoy : this.management) {
+            if (parkingBoy.isManged(parkingLot)) {
+                pb = parkingBoy;
+                break;
+            }
+        }
+        return pb;
     }
 }
