@@ -78,4 +78,21 @@ public class ParkingManagerTest {
         assertEquals(mockCar,actualCar);
     }
 
+    @Test
+    @DisplayName("story6-AC2 The parking lot service manager can provider error message that about NOT_POSIOTION by query")
+    void should___when__give_() {
+        //given
+        ParkingLot mockParkingLot = mock(ParkingLot.class);
+        ParkingManager parkingManager = new ParkingManager(mockParkingLot);
+        Car mockCar = mock(Car.class);
+
+        when(mockParkingLot.isLotFull()).thenReturn(true);
+        //when
+        ParkingTicket actualTicket = parkingManager.park(mockCar);
+        //then
+        assertEquals(null,actualTicket);
+        assertEquals(ParkingLot.NOT_POSIOTION, parkingManager.query());
+    }
+
+
 }
