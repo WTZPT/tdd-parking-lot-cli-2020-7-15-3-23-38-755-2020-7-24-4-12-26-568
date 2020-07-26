@@ -6,6 +6,7 @@ public class ParkingTicket {
    private String licenseNumber;
 
     public ParkingTicket() {
+        this.isUsed = false;
     }
 
     public ParkingTicket(Boolean isUsed, String licenseNumber) {

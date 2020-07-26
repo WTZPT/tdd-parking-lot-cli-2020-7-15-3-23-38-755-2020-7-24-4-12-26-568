@@ -7,13 +7,14 @@ import java.util.ArrayList;
  **/
 public class ParkingManager {
     private ArrayList<ParkingBoy> management = new ArrayList<>();
-    private ArrayList<ParkingLot> parkingLots;
+    private ParkingLot parkingLot;
+    private String errorMessage;
 
     public ParkingManager() {
     }
 
-    public ParkingManager(ArrayList<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
+    public ParkingManager(ParkingLot parkingLot) {
+        this.parkingLot = parkingLot;
     }
 
     public void addParkingBoys(ArrayList<ParkingBoy> boys) {
@@ -45,10 +46,28 @@ public class ParkingManager {
     }
 
     public ParkingTicket park(Car car) {
-        return null;
+        if (this.parkingLot.isLotFull()) {
+            this.errorMessage = ParkingLot.NOT_POSIOTION;
+            return null;
+        }
+        return parkingLot.park(car);
     }
 
-    public Car fetch(ParkingTicket actualTicket) {
-        return null;
+    public Car fetch(ParkingTicket parkingTicket) {
+        if (parkingTicket == null || parkingTicket.equals(null)) {
+            this.errorMessage = ParkingLot.NULL_TICKET;
+        }
+        if(parkingTicket.getUsed()){
+            this.errorMessage = ParkingLot.HAS_USED;
+        }
+        Car car = this.parkingLot.fetch(parkingTicket);
+        if(car == null) {
+            this.errorMessage = ParkingLot.NOT_PROVIDE;
+        }
+        return car;
+    }
+
+    public String query() {
+        return this.errorMessage;
     }
 }

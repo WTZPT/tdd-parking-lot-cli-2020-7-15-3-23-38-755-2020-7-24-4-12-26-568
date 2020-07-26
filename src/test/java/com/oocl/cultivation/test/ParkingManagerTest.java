@@ -59,14 +59,17 @@ public class ParkingManagerTest {
     @DisplayName("story6-AC2 The parking lot service manager can also manage parking lots. " +
             "And (s)he can park or fetch the car just as a standard parking boy (Story 3). " +
             "Note that (s)he can only store and fetch the car from his/her own parking lots.")
-    void should___when__give_() {
+    void should_validate_ticket_and_car_when_park_and_fetch_give_car_and_ticket() {
         //given
-        ParkingLot parkingLot = mock(ParkingLot.class);
-        ArrayList<ParkingLot> parkingLots = new ArrayList<>();
-        parkingLots.add(parkingLot);
-        ParkingManager parkingManager = new ParkingManager(parkingLots);
+        ParkingLot mockParkingLot = mock(ParkingLot.class);
+        ParkingManager parkingManager = new ParkingManager(mockParkingLot);
         ParkingTicket mockParkingTicket = mock(ParkingTicket.class);
         Car mockCar = mock(Car.class);
+
+        when(mockParkingLot.isLotFull()).thenReturn(false);
+        when(mockParkingTicket.getUsed()).thenReturn(false);
+        when(mockParkingLot.fetch(eq(mockParkingTicket))).thenReturn(mockCar);
+        when(mockParkingLot.park(eq(mockCar))).thenReturn(mockParkingTicket);
         //when
         ParkingTicket actualTicket = parkingManager.park(mockCar);
         Car actualCar = parkingManager.fetch(actualTicket);
@@ -74,4 +77,5 @@ public class ParkingManagerTest {
         assertEquals(mockParkingTicket,actualTicket);
         assertEquals(mockCar,actualCar);
     }
+
 }

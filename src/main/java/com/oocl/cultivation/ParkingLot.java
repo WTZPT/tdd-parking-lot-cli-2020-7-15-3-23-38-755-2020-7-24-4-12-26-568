@@ -3,8 +3,14 @@ package com.oocl.cultivation;
 import java.util.HashMap;
 
 public class ParkingLot {
+    public final static String NOT_POSIOTION = "Not enough position.";
+    public final static String NOT_PROVIDE = "Unrecognized parking ticket.";
+    public final static String HAS_USED = "Unrecognized parking ticket.";
+    public final static String NULL_TICKET = "Please provide your parking ticket.";
+
     private HashMap<ParkingTicket, Car> spots = new HashMap<>();
     private int capacity = 10;
+    private String errorMessage;
 
     public ParkingTicket park(Car car) {
         if (spots.size() + 1 > capacity) {
@@ -16,10 +22,11 @@ public class ParkingLot {
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
-        if (parkingTicket == null || parkingTicket.getUsed()) {
-            return null;
+        Car car = this.spots.get(parkingTicket);
+        if (car == null) {
+            this.errorMessage = NOT_PROVIDE;
         }
-        return this.spots.get(parkingTicket);
+        return car;
     }
 
     public HashMap<ParkingTicket, Car> getSpots() {
@@ -39,6 +46,10 @@ public class ParkingLot {
     }
 
     public double getPositionRate() {
-        return hasSurplus()/(this.capacity*1.0);
+        return hasSurplus() / (this.capacity * 1.0);
+    }
+
+    public String getErrorMessage() {
+        return this.errorMessage;
     }
 }
