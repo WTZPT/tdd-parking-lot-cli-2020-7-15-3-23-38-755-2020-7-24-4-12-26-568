@@ -124,5 +124,48 @@ public class ParkingManagerTest {
         assertEquals(ParkingLot.HAS_USED, actualErrorMsg);
     }
 
+    @Test
+    @DisplayName(" If the manager tells the parking boy to park or fetch the car, " +
+            "then the manager should be able to display the error message to the customer if the parking boy failed to do the operation.")
+    void should_validate_NOT_POSITION_when_park_fail_then_query() {
+        //given
+        ParkingLot mockParkingLot = mock(ParkingLot.class);
+        ParkingManager parkingManager = new ParkingManager(mockParkingLot);
+        ParkingBoy mockParkingBoy = mock(ParkingBoy.class);
+        Car mockCar = new Car();
+        when(mockParkingBoy.isManged(eq(mockParkingLot))).thenReturn(true);
+        when(mockParkingBoy.park(eq(mockCar))).thenReturn(null);
+        parkingManager.addParkingBoy(mockParkingBoy);
+        //when
+        when(mockParkingBoy.query()).thenReturn(ParkingLot.NOT_POSIOTION);
+        parkingManager.park(mockParkingLot, mockCar);
+        String actualNotPositionErrorMsg = parkingManager.query();
+        //then
+        assertEquals(actualNotPositionErrorMsg, ParkingLot.NOT_POSIOTION);
+    }
 
+    @Test
+    @DisplayName(" If the manager tells the parking boy to park or fetch the car, " +
+            "then the manager should be able to display the error message to the customer if the parking boy failed to do the operation.")
+    void should_validate_HAS_USED_and_NOT_PRODIVED_when_fetch_fail_then_quert() {
+        //given
+        ParkingLot mockParkingLot = mock(ParkingLot.class);
+        ParkingManager parkingManager = new ParkingManager(mockParkingLot);
+        ParkingBoy mockParkingBoy = mock(ParkingBoy.class);
+        ParkingTicket mockTicket = mock(ParkingTicket.class);
+        when(mockParkingBoy.isManged(eq(mockParkingLot))).thenReturn(true);
+        parkingManager.addParkingBoy(mockParkingBoy);
+        //when
+        when(mockParkingBoy.fetch(eq(null))).thenReturn(null);
+        when(mockParkingBoy.query()).thenReturn(ParkingLot.NULL_TICKET);
+        parkingManager.fetch(mockParkingLot, null);
+        String actualNotProvideTicketErrorMsg = parkingManager.query();
+        when(mockParkingBoy.fetch(eq(mockTicket))).thenReturn(null);
+        when(mockParkingBoy.query()).thenReturn(ParkingLot.HAS_USED);
+        parkingManager.fetch(mockParkingLot,mockTicket);
+        String actualHasUsedTicketErrorMsg = parkingManager.query();
+        //then
+        assertEquals(ParkingLot.NULL_TICKET, actualNotProvideTicketErrorMsg);
+        assertEquals(ParkingLot.HAS_USED, actualHasUsedTicketErrorMsg);
+    }
 }

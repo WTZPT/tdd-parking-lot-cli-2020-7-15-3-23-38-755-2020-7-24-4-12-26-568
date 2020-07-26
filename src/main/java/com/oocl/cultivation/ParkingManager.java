@@ -38,7 +38,11 @@ public class ParkingManager {
             }
         }
 
-        return pb.park(car);
+        ParkingTicket ticket = pb.park(car);
+        if (ticket == null) {
+            this.errorMessage = pb.query();
+        }
+        return ticket;
     }
 
     public void addParkingBoy(ParkingBoy parkingBoy) {
@@ -58,7 +62,7 @@ public class ParkingManager {
             this.errorMessage = ParkingLot.NULL_TICKET;
             return null;
         }
-        if(parkingTicket.getUsed()){
+        if (parkingTicket.getUsed()) {
             this.errorMessage = ParkingLot.HAS_USED;
             return null;
         }
@@ -68,5 +72,23 @@ public class ParkingManager {
 
     public String query() {
         return this.errorMessage;
+    }
+
+    public Car fetch(ParkingLot parkingLot, ParkingTicket parkingTicket) {
+        ParkingBoy pb = null;
+        for (ParkingBoy parkingBoy : this.management) {
+            if (parkingBoy.isManged(parkingLot)) {
+                pb = parkingBoy;
+                break;
+            }
+        }
+
+        Car car = pb.fetch(parkingTicket);
+
+        if (car == null) {
+            this.errorMessage = pb.query();
+        }
+
+        return car;
     }
 }
