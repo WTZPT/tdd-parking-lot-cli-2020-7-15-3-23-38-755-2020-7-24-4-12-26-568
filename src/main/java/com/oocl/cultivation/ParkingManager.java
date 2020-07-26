@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * @Author weitangzhao
  **/
-public class ParkingManager {
+public class ParkingManager implements ParkingBehavior{
     private ArrayList<ParkingBoy> management = new ArrayList<>();
     private ParkingLot parkingLot;
     private String errorMessage;
@@ -39,6 +39,7 @@ public class ParkingManager {
         this.management.add(parkingBoy);
     }
 
+    @Override
     public ParkingTicket park(Car car) {
         if (this.parkingLot.isLotFull()) {
             this.errorMessage = ParkingLot.NOT_POSIOTION;
@@ -47,6 +48,7 @@ public class ParkingManager {
         return parkingLot.park(car);
     }
 
+    @Override
     public Car fetch(ParkingTicket parkingTicket) {
         if (parkingTicket == null || parkingTicket.equals(null)) {
             this.errorMessage = ParkingLot.NULL_TICKET;
@@ -60,6 +62,7 @@ public class ParkingManager {
         return this.parkingLot.fetch(parkingTicket);
     }
 
+    @Override
     public String query() {
         return this.errorMessage;
     }
