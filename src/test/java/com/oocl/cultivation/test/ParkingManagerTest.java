@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.isA;
  **/
 public class ParkingManagerTest {
     @Test
-    @DisplayName("story6-AC1 The parking lot service manager can add parking boys to management list." )
+    @DisplayName("story6-AC1 The parking lot service manager can add parking boys to management list.")
     void should_validate_management_length__when_add_give_parking_boys() {
         //given
         ParkingManager parkingManager = new ParkingManager();
@@ -31,7 +31,7 @@ public class ParkingManagerTest {
         parkingManager.addParkingBoys(boys);
         parkingManager.addParkingBoy(new ParkingBoy());
         //then
-        assertEquals(4,parkingManager.getManagement().size());
+        assertEquals(4, parkingManager.getManagement().size());
     }
 
     @Test
@@ -50,9 +50,9 @@ public class ParkingManagerTest {
         Car car = new Car();
         when(mockParkingBoy2.park(eq(car))).thenReturn(mockParkingTicket);
         //when
-        ParkingTicket actuaParkingTicket = parkingManager.park(mocParkingLot1,car);
+        ParkingTicket actuaParkingTicket = parkingManager.park(mocParkingLot1, car);
         //then
-        assertEquals(mockParkingTicket,actuaParkingTicket);
+        assertEquals(mockParkingTicket, actuaParkingTicket);
     }
 
     @Test
@@ -74,13 +74,13 @@ public class ParkingManagerTest {
         ParkingTicket actualTicket = parkingManager.park(mockCar);
         Car actualCar = parkingManager.fetch(actualTicket);
         //then
-        assertEquals(mockParkingTicket,actualTicket);
-        assertEquals(mockCar,actualCar);
+        assertEquals(mockParkingTicket, actualTicket);
+        assertEquals(mockCar, actualCar);
     }
 
     @Test
     @DisplayName("story6-AC2 The parking lot service manager can provider error message that about NOT_POSIOTION by query")
-    void should___when__give_() {
+    void should_validate_NOT_POSIOTION_error_message_when_park_not_position_give_car() {
         //given
         ParkingLot mockParkingLot = mock(ParkingLot.class);
         ParkingManager parkingManager = new ParkingManager(mockParkingLot);
@@ -90,8 +90,38 @@ public class ParkingManagerTest {
         //when
         ParkingTicket actualTicket = parkingManager.park(mockCar);
         //then
-        assertEquals(null,actualTicket);
+        assertEquals(null, actualTicket);
         assertEquals(ParkingLot.NOT_POSIOTION, parkingManager.query());
+    }
+
+    @Test
+    @DisplayName("story6-AC2 The parking lot service manager can provider error message that about NULL_TICKET by query")
+    void should_validate_NULL_TICKET_error_message_when_fetch_not_provide_ticket_give_null() {
+        //given
+        ParkingLot mockParkingLot = mock(ParkingLot.class);
+        ParkingManager parkingManager = new ParkingManager(mockParkingLot);
+        //when
+        Car actualCar = parkingManager.fetch(null);
+        String actualErrorMsg = parkingManager.query();
+        //then
+        assertEquals(null, actualCar);
+        assertEquals(ParkingLot.NULL_TICKET, actualErrorMsg);
+    }
+
+    @Test
+    @DisplayName("story6-AC2 The parking lot service manager can provider error message that about HAS_USED by query")
+    void should_validate_HAS_USED_when_fetch_give_ticket() {
+        //given
+        ParkingLot mockParkingLot = mock(ParkingLot.class);
+        ParkingManager parkingManager = new ParkingManager(mockParkingLot);
+        ParkingTicket mockTicket = mock(ParkingTicket.class);
+        when(mockTicket.getUsed()).thenReturn(true);
+        //when
+        Car actualCar = parkingManager.fetch(mockTicket);
+        String actualErrorMsg = parkingManager.query();
+        //then
+        assertEquals(null, actualCar);
+        assertEquals(ParkingLot.HAS_USED, actualErrorMsg);
     }
 
 

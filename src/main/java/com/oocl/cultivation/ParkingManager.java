@@ -56,15 +56,14 @@ public class ParkingManager {
     public Car fetch(ParkingTicket parkingTicket) {
         if (parkingTicket == null || parkingTicket.equals(null)) {
             this.errorMessage = ParkingLot.NULL_TICKET;
+            return null;
         }
         if(parkingTicket.getUsed()){
             this.errorMessage = ParkingLot.HAS_USED;
+            return null;
         }
-        Car car = this.parkingLot.fetch(parkingTicket);
-        if(car == null) {
-            this.errorMessage = ParkingLot.NOT_PROVIDE;
-        }
-        return car;
+
+        return this.parkingLot.fetch(parkingTicket);
     }
 
     public String query() {

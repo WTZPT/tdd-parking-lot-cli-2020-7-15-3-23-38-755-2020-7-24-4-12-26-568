@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 public class ParkingLot {
     public final static String NOT_POSIOTION = "Not enough position.";
-    public final static String NOT_PROVIDE = "Unrecognized parking ticket.";
     public final static String HAS_USED = "Unrecognized parking ticket.";
     public final static String NULL_TICKET = "Please provide your parking ticket.";
 
@@ -23,9 +22,8 @@ public class ParkingLot {
 
     public Car fetch(ParkingTicket parkingTicket) {
         Car car = this.spots.get(parkingTicket);
-        if (car == null) {
-            this.errorMessage = NOT_PROVIDE;
-        }
+        this.spots.remove(parkingTicket);
+       parkingTicket.setUsed(true);
         return car;
     }
 
