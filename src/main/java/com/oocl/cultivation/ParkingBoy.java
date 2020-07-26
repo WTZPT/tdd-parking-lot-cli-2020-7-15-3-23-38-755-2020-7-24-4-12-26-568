@@ -16,6 +16,10 @@ public class ParkingBoy {
         this.parkingLots = lots;
     }
 
+    public ParkingBoy() {
+
+    }
+
     public ParkingTicket park(Car car) {
         ParkingLot parkingLot = null;
         double posistionRate = -1;
@@ -54,5 +58,9 @@ public class ParkingBoy {
 
     public String query(){
         return this.errorMsg;
+    }
+
+    public boolean isManged(ParkingLot parkingLot){
+        return this.parkingLots.contains(parkingLot);
     }
 }

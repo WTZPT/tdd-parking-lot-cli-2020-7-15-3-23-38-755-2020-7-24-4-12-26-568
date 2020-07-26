@@ -224,6 +224,5 @@ public class ParkingBoyTest {
         parkingBoy.park(car);
         //then
         verify(lotBHas1Car,times(1)).park(eq(car));
-
     }
 }
