@@ -23,13 +23,13 @@ public class ParkingBoy {
     public ParkingTicket park(Car car) {
         ParkingLot parkingLot = null;
         double posistionRate = -1;
-        for ( ParkingLot lot : parkingLots) {
-            if(lot.getPositionRate() > posistionRate) {
+        for (ParkingLot lot : parkingLots) {
+            if (lot.getPositionRate() > posistionRate) {
                 posistionRate = lot.getPositionRate();
                 parkingLot = lot;
             }
         }
-        if(parkingLot.isLotFull()){
+        if (parkingLot.isLotFull()) {
             this.errorMsg = "Not enough position.";
             return null;
         }
@@ -38,29 +38,29 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
-        if(parkingTicket == null) {
+        if (parkingTicket == null) {
             this.errorMsg = "Please provide your parking ticket.";
             return null;
         }
-        if(parkingTicket.getUsed()) {
+        if (parkingTicket.getUsed()) {
             this.errorMsg = "Unrecognized parking ticket.";
             return null;
         }
         Car car = null;
         for (ParkingLot lot : parkingLots) {
             car = lot.fetch(parkingTicket);
-            if(car != null) {
+            if (car != null) {
                 break;
             }
         }
         return car;
     }
 
-    public String query(){
+    public String query() {
         return this.errorMsg;
     }
 
-    public boolean isManged(ParkingLot parkingLot){
+    public boolean isManged(ParkingLot parkingLot) {
         return this.parkingLots.contains(parkingLot);
     }
 }

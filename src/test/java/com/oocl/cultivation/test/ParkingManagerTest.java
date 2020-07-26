@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
@@ -53,5 +55,23 @@ public class ParkingManagerTest {
         assertEquals(mockParkingTicket,actuaParkingTicket);
     }
 
-
+    @Test
+    @DisplayName("story6-AC2 The parking lot service manager can also manage parking lots. " +
+            "And (s)he can park or fetch the car just as a standard parking boy (Story 3). " +
+            "Note that (s)he can only store and fetch the car from his/her own parking lots.")
+    void should___when__give_() {
+        //given
+        ParkingLot parkingLot = mock(ParkingLot.class);
+        ArrayList<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot);
+        ParkingManager parkingManager = new ParkingManager(parkingLots);
+        ParkingTicket mockParkingTicket = mock(ParkingTicket.class);
+        Car mockCar = mock(Car.class);
+        //when
+        ParkingTicket actualTicket = parkingManager.park(mockCar);
+        Car actualCar = parkingManager.fetch(actualTicket);
+        //then
+        assertEquals(mockParkingTicket,actualTicket);
+        assertEquals(mockCar,actualCar);
+    }
 }
