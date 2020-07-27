@@ -2,7 +2,7 @@ package com.oocl.cultivation;
 
 import java.util.ArrayList;
 
-public class ParkingBoy implements ParkingBehavior{
+public class ParkingBoy implements ParkingBehavior {
 
     protected ArrayList<ParkingLot> parkingLots;
     protected String errorMsg;
@@ -18,15 +18,9 @@ public class ParkingBoy implements ParkingBehavior{
 
     @Override
     public ParkingTicket park(Car car) {
-        ParkingLot parkingLot = null;
-        double positionRate = -1;
-        for (ParkingLot lot : parkingLots) {
-            if (lot.getPositionRate() > positionRate) {
-                positionRate = lot.getPositionRate();
-                parkingLot = lot;
-            }
-        }
-        if (parkingLot.isLotFull()) {
+        ParkingLot parkingLot = parkingLots.stream().filter(pl -> !pl.isLotFull()).findFirst().orElse(null);
+
+        if (parkingLot == null) {
             this.errorMsg = "Not enough position.";
             return null;
         }
@@ -51,6 +45,7 @@ public class ParkingBoy implements ParkingBehavior{
                 break;
             }
         }
+
         return car;
     }
 
