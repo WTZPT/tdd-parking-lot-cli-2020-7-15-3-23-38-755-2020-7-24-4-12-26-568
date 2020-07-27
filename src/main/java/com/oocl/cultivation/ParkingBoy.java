@@ -21,7 +21,7 @@ public class ParkingBoy implements ParkingBehavior {
         ParkingLot parkingLot = parkingLots.stream().filter(pl -> !pl.isLotFull()).findFirst().orElse(null);
 
         if (parkingLot == null) {
-            this.errorMsg = ParkingBehavior.NOT_POSITION;
+            this.errorMsg = NOT_POSITION;
             return null;
         }
         ParkingTicket parkingTicket = parkingLot.park(car);
@@ -31,11 +31,11 @@ public class ParkingBoy implements ParkingBehavior {
     @Override
     public Car fetch(ParkingTicket parkingTicket) {
         if (parkingTicket == null) {
-            this.errorMsg = ParkingBehavior.NULL_TICKET;
+            this.errorMsg = NULL_TICKET;
             return null;
         }
         if (parkingTicket.getUsed()) {
-            this.errorMsg = ParkingBehavior.HAS_USED;
+            this.errorMsg = HAS_USED;
             return null;
         }
         Car car = null;
