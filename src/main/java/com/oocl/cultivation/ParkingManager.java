@@ -7,7 +7,7 @@ import static com.oocl.cultivation.exception.ExceptionMessage.*;
 /**
  * @Author weitangzhao
  **/
-public class ParkingManager implements ParkingBehavior{
+public class ParkingManager implements ParkingBehavior {
     private ArrayList<ParkingBoy> management = new ArrayList<>();
     private ParkingLot parkingLot;
     private String errorMessage;
@@ -52,8 +52,8 @@ public class ParkingManager implements ParkingBehavior{
 
     @Override
     public Car fetch(ParkingTicket parkingTicket) {
-        if (parkingTicket == null || parkingTicket.equals(null)) {
-            this.errorMessage =  NULL_TICKET;
+        if (parkingTicket == null) {
+            this.errorMessage = NULL_TICKET;
             return null;
         }
         if (parkingTicket.getUsed()) {
