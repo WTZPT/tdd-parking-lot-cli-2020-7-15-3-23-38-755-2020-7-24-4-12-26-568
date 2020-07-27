@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class ParkingBoy implements ParkingBehavior{
 
-    private ArrayList<ParkingLot> parkingLots;
-    private String errorMsg;
+    protected ArrayList<ParkingLot> parkingLots;
+    protected String errorMsg;
 
     public ParkingBoy(ParkingLot parkingLot) {
         this.parkingLots = new ArrayList<>();
@@ -19,10 +19,10 @@ public class ParkingBoy implements ParkingBehavior{
     @Override
     public ParkingTicket park(Car car) {
         ParkingLot parkingLot = null;
-        double posistionRate = -1;
+        double positionRate = -1;
         for (ParkingLot lot : parkingLots) {
-            if (lot.getPositionRate() > posistionRate) {
-                posistionRate = lot.getPositionRate();
+            if (lot.getPositionRate() > positionRate) {
+                positionRate = lot.getPositionRate();
                 parkingLot = lot;
             }
         }
