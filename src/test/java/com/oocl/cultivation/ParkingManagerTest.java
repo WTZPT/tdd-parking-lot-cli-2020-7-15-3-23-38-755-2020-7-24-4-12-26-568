@@ -1,18 +1,16 @@
 package com.oocl.cultivation;
 
-import com.oocl.cultivation.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
+import static com.oocl.cultivation.exception.ExceptionMessage.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.isA;
 
 /**
  * @Author weitangzhao
@@ -91,7 +89,7 @@ public class ParkingManagerTest {
         ParkingTicket actualTicket = parkingManager.park(mockCar);
         //then
         assertEquals(null, actualTicket);
-        assertEquals(ParkingLot.NOT_POSIOTION, parkingManager.query());
+        assertEquals(NOT_POSITION, parkingManager.query());
     }
 
     @Test
@@ -105,7 +103,7 @@ public class ParkingManagerTest {
         String actualErrorMsg = parkingManager.query();
         //then
         assertEquals(null, actualCar);
-        assertEquals(ParkingLot.NULL_TICKET, actualErrorMsg);
+        assertEquals( NULL_TICKET, actualErrorMsg);
     }
 
     @Test
@@ -121,7 +119,7 @@ public class ParkingManagerTest {
         String actualErrorMsg = parkingManager.query();
         //then
         assertEquals(null, actualCar);
-        assertEquals(ParkingLot.HAS_USED, actualErrorMsg);
+        assertEquals( HAS_USED, actualErrorMsg);
     }
 
     @Test
@@ -137,11 +135,11 @@ public class ParkingManagerTest {
         when(mockParkingBoy.park(eq(mockCar))).thenReturn(null);
         parkingManager.addParkingBoy(mockParkingBoy);
         //when
-        when(mockParkingBoy.query()).thenReturn(ParkingLot.NOT_POSIOTION);
+        when(mockParkingBoy.query()).thenReturn( NOT_POSITION);
         parkingManager.park(mockParkingLot, mockCar);
         String actualNotPositionErrorMsg = parkingManager.query();
         //then
-        assertEquals(actualNotPositionErrorMsg, ParkingLot.NOT_POSIOTION);
+        assertEquals(actualNotPositionErrorMsg,  NOT_POSITION);
     }
 
     @Test
@@ -157,15 +155,15 @@ public class ParkingManagerTest {
         parkingManager.addParkingBoy(mockParkingBoy);
         //when
         when(mockParkingBoy.fetch(eq(null))).thenReturn(null);
-        when(mockParkingBoy.query()).thenReturn(ParkingLot.NULL_TICKET);
+        when(mockParkingBoy.query()).thenReturn( NULL_TICKET);
         parkingManager.fetch(mockParkingLot, null);
         String actualNotProvideTicketErrorMsg = parkingManager.query();
         when(mockParkingBoy.fetch(eq(mockTicket))).thenReturn(null);
-        when(mockParkingBoy.query()).thenReturn(ParkingLot.HAS_USED);
+        when(mockParkingBoy.query()).thenReturn( HAS_USED);
         parkingManager.fetch(mockParkingLot,mockTicket);
         String actualHasUsedTicketErrorMsg = parkingManager.query();
         //then
-        assertEquals(ParkingLot.NULL_TICKET, actualNotProvideTicketErrorMsg);
-        assertEquals(ParkingLot.HAS_USED, actualHasUsedTicketErrorMsg);
+        assertEquals( NULL_TICKET, actualNotProvideTicketErrorMsg);
+        assertEquals( HAS_USED, actualHasUsedTicketErrorMsg);
     }
 }

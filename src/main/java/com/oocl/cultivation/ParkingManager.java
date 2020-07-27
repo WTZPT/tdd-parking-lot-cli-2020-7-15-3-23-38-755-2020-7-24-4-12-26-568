@@ -2,6 +2,8 @@ package com.oocl.cultivation;
 
 import java.util.ArrayList;
 
+import static com.oocl.cultivation.exception.ExceptionMessage.*;
+
 /**
  * @Author weitangzhao
  **/
@@ -42,7 +44,7 @@ public class ParkingManager implements ParkingBehavior{
     @Override
     public ParkingTicket park(Car car) {
         if (this.parkingLot.isLotFull()) {
-            this.errorMessage = ParkingLot.NOT_POSIOTION;
+            this.errorMessage = NOT_POSITION;
             return null;
         }
         return parkingLot.park(car);
@@ -51,11 +53,11 @@ public class ParkingManager implements ParkingBehavior{
     @Override
     public Car fetch(ParkingTicket parkingTicket) {
         if (parkingTicket == null || parkingTicket.equals(null)) {
-            this.errorMessage = ParkingLot.NULL_TICKET;
+            this.errorMessage =  NULL_TICKET;
             return null;
         }
         if (parkingTicket.getUsed()) {
-            this.errorMessage = ParkingLot.HAS_USED;
+            this.errorMessage = HAS_USED;
             return null;
         }
 

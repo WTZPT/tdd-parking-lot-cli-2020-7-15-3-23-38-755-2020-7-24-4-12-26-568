@@ -2,6 +2,8 @@ package com.oocl.cultivation;
 
 import java.util.ArrayList;
 
+import static com.oocl.cultivation.exception.ExceptionMessage.*;
+
 public class ParkingBoy implements ParkingBehavior {
 
     protected ArrayList<ParkingLot> parkingLots;
