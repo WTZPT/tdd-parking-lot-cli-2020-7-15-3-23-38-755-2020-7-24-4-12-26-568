@@ -14,8 +14,7 @@ public class ParkingLot {
     }
 
     public Car fetch(ParkingTicket parkingTicket) {
-        Car car = this.spots.get(parkingTicket);
-        this.spots.remove(parkingTicket);
+        Car car = this.spots.remove(parkingTicket);
         parkingTicket.setUsed(true);
         return car;
     }
