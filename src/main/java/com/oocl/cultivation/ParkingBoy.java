@@ -14,13 +14,15 @@ public class ParkingBoy implements ParkingBehavior {
         this.parkingLots.add(parkingLot);
     }
 
+
     public ParkingBoy(ArrayList<ParkingLot> lots) {
         this.parkingLots = lots;
     }
 
     @Override
     public ParkingTicket park(Car car) {
-        ParkingLot parkingLot = parkingLots.stream().filter(pl -> !pl.isLotFull()).findFirst().orElse(null);
+
+        ParkingLot parkingLot = parkingLots.stream().filter(lot -> !lot.isLotFull()).findFirst().orElse(null);
 
         if (parkingLot == null) {
             this.errorMsg = NOT_POSITION;
