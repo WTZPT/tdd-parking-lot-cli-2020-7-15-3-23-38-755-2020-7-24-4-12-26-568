@@ -14,7 +14,6 @@ class ParkingSuperSmartBoyTest {
     @DisplayName("story5-AC1 The super smart parking boy will always park cars to the parking lot which has a larger available position rate (positions available / total capacity).")
     void should_validate_largest_position_rate_lot_when_park_give_lots() {
         //given
-        ArrayList<ParkingLot> lots = new ArrayList<>();
         ParkingLot lotAHas3Car = mock(ParkingLot.class);
         when(lotAHas3Car.getPositionRate()).thenReturn(0.7);
         when(lotAHas3Car.park(isA(Car.class))).thenReturn(null);
@@ -24,12 +23,9 @@ class ParkingSuperSmartBoyTest {
         ParkingLot lotCHas2Car = mock(ParkingLot.class);
         when(lotCHas2Car.getPositionRate()).thenReturn(0.8);
         when(lotCHas2Car.park(isA(Car.class))).thenReturn(null);
-        lots.add(lotAHas3Car);
-        lots.add(lotBHas1Car);
-        lots.add(lotCHas2Car);
         Car car = new Car();
         //when
-        ParkingSuperSmartBoy parkingBoy = new ParkingSuperSmartBoy(lots);
+        ParkingSuperSmartBoy parkingBoy = new ParkingSuperSmartBoy(lotAHas3Car,lotBHas1Car,lotCHas2Car);
         parkingBoy.park(car);
         //then
         verify(lotBHas1Car, times(1)).park(eq(car));

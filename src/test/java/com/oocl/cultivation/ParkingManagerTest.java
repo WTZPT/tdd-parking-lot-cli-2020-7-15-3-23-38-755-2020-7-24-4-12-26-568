@@ -29,7 +29,7 @@ public class ParkingManagerTest {
         parkingManager.addParkingBoys(boys);
         parkingManager.addParkingBoy(mock(ParkingBoy.class));
         //then
-        assertEquals(4, parkingManager.getManagement().size());
+        assertEquals(4, parkingManager.getManagements().size());
     }
 
     @Test

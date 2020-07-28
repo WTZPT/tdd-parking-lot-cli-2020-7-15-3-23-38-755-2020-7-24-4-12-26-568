@@ -2,7 +2,6 @@ package com.oocl.cultivation;
 
 import com.oocl.cultivation.exception.ExceptionMessage;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 
 public class ParkingSuperSmartBoy extends ParkingBoy {
@@ -10,8 +9,8 @@ public class ParkingSuperSmartBoy extends ParkingBoy {
         super(parkingLot);
     }
 
-    public ParkingSuperSmartBoy(ArrayList<ParkingLot> lots) {
-        super(lots);
+    public ParkingSuperSmartBoy(ParkingLot... parkingLots) {
+        super(parkingLots);
     }
 
     @Override

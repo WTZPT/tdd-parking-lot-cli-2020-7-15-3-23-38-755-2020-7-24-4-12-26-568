@@ -1,22 +1,17 @@
 package com.oocl.cultivation;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.oocl.cultivation.exception.ExceptionMessage.*;
 
 public class ParkingBoy implements ParkingBehavior {
 
-    protected ArrayList<ParkingLot> parkingLots;
+    protected List<ParkingLot> parkingLots;
     protected String errorMsg;
 
-    public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLots = new ArrayList<>();
-        this.parkingLots.add(parkingLot);
-    }
-
-
-    public ParkingBoy(ArrayList<ParkingLot> lots) {
-        this.parkingLots = lots;
+    public ParkingBoy(ParkingLot... parkingLots) {
+        this.parkingLots = Arrays.asList(parkingLots);
     }
 
     @Override

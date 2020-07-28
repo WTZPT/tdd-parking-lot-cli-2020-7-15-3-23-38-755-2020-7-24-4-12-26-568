@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
@@ -18,7 +19,7 @@ class ParkingSmartBoyTest {
     @DisplayName("story4-ac1 The smart parking boy will always park cars to the parking lot which contains more empty positions.")
     void should_validate_lot__when_park_give_lots() {
         //given
-        ArrayList<ParkingLot> lots = new ArrayList<>();
+        List<ParkingLot> lots = new ArrayList<>();
         ParkingLot lotAHas3Car = mock(ParkingLot.class);
         when(lotAHas3Car.hasSurplus()).thenReturn(7);
         when(lotAHas3Car.park(isA(Car.class))).thenReturn(null);
@@ -33,7 +34,7 @@ class ParkingSmartBoyTest {
         lots.add(lotCHas2Car);
         Car car = new Car();
         //when
-        ParkingSmartBoy parkingBoy = new ParkingSmartBoy(lots);
+        ParkingSmartBoy parkingBoy = new ParkingSmartBoy(lotAHas3Car,lotBHas1Car,lotCHas2Car);
         parkingBoy.park(car);
         //then
         verify(lotBHas1Car, times(1)).park(eq(car));

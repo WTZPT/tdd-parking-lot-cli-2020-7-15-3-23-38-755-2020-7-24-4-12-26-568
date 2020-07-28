@@ -17,6 +17,7 @@ public class ParkingLotTest {
         //given
         ParkingLot parkingLot = new ParkingLot();
         List<Car> cars = new ArrayList<>();
+        //todo two
         for (int i = 0; i < 10; i++) {
             cars.add(new Car());
         }

@@ -1,15 +1,12 @@
 package com.oocl.cultivation;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 
@@ -88,7 +85,7 @@ public class ParkingBoyTest {
         //when
         Car car = parkingBoy.fetch(parkingTicket);
         //then
-        assertEquals(null, car);
+        assertNull(car);
     }
 
     @Test
@@ -179,18 +176,14 @@ public class ParkingBoyTest {
     @DisplayName("story6 isManged method can  Determine if the boy is in charge of the parking lot ")
     void should___when__give_() {
         //given
-        ArrayList<ParkingLot> lots = new ArrayList<>();
         ParkingLot mockParkingLotA = mock(ParkingLot.class);
-        lots.add(mockParkingLotA);
         ParkingLot mockParkingLotB = mock(ParkingLot.class);
-        lots.add(mockParkingLotB);
         ParkingLot mockParkingLotC = mock(ParkingLot.class);
-        lots.add(mockParkingLotC);
         ParkingLot mockParkingLotD = mock(ParkingLot.class);
         //when
-        ParkingBoy parkingBoy = new ParkingBoy(lots);
+        ParkingBoy parkingBoy = new ParkingBoy(mockParkingLotA,mockParkingLotB,mockParkingLotC);
         //then
-        assertEquals(true, parkingBoy.isManged(mockParkingLotA));
+        assertTrue(parkingBoy.isManged(mockParkingLotA));
         assertEquals(true, parkingBoy.isManged(mockParkingLotB));
         assertEquals(true, parkingBoy.isManged(mockParkingLotC));
         assertEquals(false, parkingBoy.isManged(mockParkingLotD));
