@@ -97,7 +97,7 @@ public class ParkingBoyTest {
         //when
         Car car = parkingBoy.fetch(null);
         //then
-        assertEquals(null, car);
+        assertNull(car);
     }
 
     @Test
@@ -111,7 +111,7 @@ public class ParkingBoyTest {
         //when
         Car car = parkingBoy.fetch(parkingTicket);
         //then
-        assertEquals(null, car);
+        assertNull(car);
     }
 
     @Test
@@ -123,7 +123,7 @@ public class ParkingBoyTest {
         //when
         ParkingTicket parkingTicket = parkingBoy.park(new Car());
         //then
-        assertEquals(null, parkingTicket);
+        assertNull(parkingTicket);
     }
 
     @Test
@@ -139,7 +139,7 @@ public class ParkingBoyTest {
         Car carFromTicketUsed = parkingBoy.fetch(parkingTicketUsed);
         String ticketUsedErrorMsg = parkingBoy.query();
         //then
-        assertEquals(null, carFromTicketUsed);
+        assertNull(carFromTicketUsed);
         assertEquals("Unrecognized parking ticket.", ticketUsedErrorMsg);
     }
 
@@ -153,7 +153,7 @@ public class ParkingBoyTest {
         Car car = parkingBoy.fetch(null);
         String errorMsg = parkingBoy.query();
         //then
-        assertEquals(null, car);
+        assertNull(car);
         assertEquals("Please provide your parking ticket.", errorMsg);
     }
 
@@ -168,7 +168,7 @@ public class ParkingBoyTest {
         ParkingTicket parkingTicket = parkingBoy.park(new Car());
         String errorMsg = parkingBoy.query();
         //then
-        assertEquals(null, parkingTicket);
+        assertNull(parkingTicket);
         assertEquals("Not enough position.", errorMsg);
     }
 
@@ -184,8 +184,8 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(mockParkingLotA,mockParkingLotB,mockParkingLotC);
         //then
         assertTrue(parkingBoy.isManged(mockParkingLotA));
-        assertEquals(true, parkingBoy.isManged(mockParkingLotB));
-        assertEquals(true, parkingBoy.isManged(mockParkingLotC));
-        assertEquals(false, parkingBoy.isManged(mockParkingLotD));
+        assertTrue(parkingBoy.isManged(mockParkingLotB));
+        assertTrue(parkingBoy.isManged(mockParkingLotC));
+        assertFalse(parkingBoy.isManged(mockParkingLotD));
     }
 }

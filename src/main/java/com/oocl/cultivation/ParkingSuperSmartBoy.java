@@ -5,9 +5,6 @@ import com.oocl.cultivation.exception.ExceptionMessage;
 import java.util.Comparator;
 
 public class ParkingSuperSmartBoy extends ParkingBoy {
-    public ParkingSuperSmartBoy(ParkingLot parkingLot) {
-        super(parkingLot);
-    }
 
     public ParkingSuperSmartBoy(ParkingLot... parkingLots) {
         super(parkingLots);
