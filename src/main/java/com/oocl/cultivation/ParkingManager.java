@@ -8,7 +8,7 @@ import static com.oocl.cultivation.exception.ExceptionMessage.*;
  * @Author weitangzhao
  **/
 public class ParkingManager implements ParkingBehavior {
-    private ArrayList<ParkingBoy> management = new ArrayList<>();
+    private ArrayList<ParkingBoy> managements = new ArrayList<>();
     private ParkingLot parkingLot;
     private String errorMessage;
 
@@ -20,25 +20,25 @@ public class ParkingManager implements ParkingBehavior {
     }
 
     public void addParkingBoys(ArrayList<ParkingBoy> boys) {
-        management.addAll(boys);
+        managements.addAll(boys);
     }
 
-    public ArrayList<ParkingBoy> getManagement() {
-        return management;
+    public ArrayList<ParkingBoy> getManagements() {
+        return managements;
     }
 
     public ParkingTicket park(ParkingLot parkingLot, Car car) {
-        ParkingBoy pb = getParkingBoy(parkingLot);
+        ParkingBoy parkingBoy = getParkingBoy(parkingLot);
 
-        ParkingTicket ticket = pb.park(car);
+        ParkingTicket ticket = parkingBoy.park(car);
         if (ticket == null) {
-            this.errorMessage = pb.query();
+            this.errorMessage = parkingBoy.query();
         }
         return ticket;
     }
 
     public void addParkingBoy(ParkingBoy parkingBoy) {
-        this.management.add(parkingBoy);
+        this.managements.add(parkingBoy);
     }
 
     @Override
@@ -82,13 +82,11 @@ public class ParkingManager implements ParkingBehavior {
     }
 
     private ParkingBoy getParkingBoy(ParkingLot parkingLot) {
-        ParkingBoy pb = null;
-        for (ParkingBoy parkingBoy : this.management) {
-            if (parkingBoy.isManged(parkingLot)) {
-                pb = parkingBoy;
-                break;
-            }
-        }
-        return pb;
+
+        return this.managements
+                .stream()
+                .filter(management -> management.isManged(parkingLot))
+                .findFirst()
+                .orElse(null);
     }
 }
